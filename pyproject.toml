@@ -1,0 +1,62 @@
+[project]
+name = "TradersDiary"
+version = "0.0.1"
+requires-python = ">=3.12.3"
+
+[project.urls]
+Homepage = "https://github.com/platsajacki/traders_diary"
+Repository = "https://github.com/platsajacki/traders_diary"
+
+[tool.black]
+line-length = 120
+target-version = ['py312']
+exclude = '''
+/(
+  | venv
+  | .mypy_cache
+  | migrations
+)/
+'''
+skip-string-normalization = true
+
+[tool.flake8]
+max-line-length = 120
+exclude = [
+    'static',
+    'migrations',
+    '__pycache__',
+    'venv',
+]
+
+[tool.flake8.ignore]
+E203 = 'whitespace before ":"'
+W503 = 'line break before binary operator'
+E701 = 'multiple statements on one line (colon)'
+
+[tool.isort]
+profile = 'black'
+line_length = 120
+known_pytest = ['pytest', 'pytest_mock']
+known_django = ['django']
+sections = [
+    'FUTURE',
+    'PYTEST',
+    'STDLIB',
+    'DJANGO',
+    'THIRDPARTY',
+    'FIRSTPARTY',
+    'LOCALFOLDER'
+]
+use_parentheses = true
+include_trailing_comma = true
+multi_line_output = 3
+skip = ['migrations', 'venv']
+
+
+[tool.pytest.ini_options]
+pythonpath = ["tradi"]
+DJANGO_SETTINGS_MODULE = "app.settings"
+norecursedirs = ["env/*", "venv/*"]
+addopts = ["-s", "-v", "-p", "no:cacheprovider"]
+testpaths = ["tradi/pytest_tests/"]
+python_files = ["test_*.py"]
