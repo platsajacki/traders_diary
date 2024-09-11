@@ -18,17 +18,22 @@ CSRF_TRUSTED_ORIGINS = getenv(
     'https://127.0.0.1, https://localhost, https://www.127.0.0.1, https://www.localhost',
 ).split(', ')
 
-INSTALLED_APPS = [
+django_apps = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+# third_party_apps = [
+# ]
+local_apps = [
     'accounting',
     'bybit',
     'core',
 ]
+INSTALLED_APPS = django_apps + local_apps
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,6 +1,7 @@
 media/
 db.json
 logs
+static
 staticfiles
 debug.ipynb
 
