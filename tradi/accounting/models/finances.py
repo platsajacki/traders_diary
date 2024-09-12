@@ -1,8 +1,8 @@
 from typing import Any
 
-from django.core.exceptions import ValidationError
 from django.db import models
 
+from accounting.validators import validate_compatible_assets
 from core.models import TimestampedModel
 
 
@@ -101,6 +101,8 @@ class TradingPair(TimestampedModel):
             Выполняет валидацию торговой пары, проверяя совместимость активов.
         save(*args: Any, **kwargs: Any) -> None:
             Сохраняет объект после проверки на валидность.
+        symbol() -> str:
+            Возвращает символ (текер) торговой пары, представляющий комбинацию тикеров базового и котируемого активов.
     """
 
     base_asset = models.ForeignKey(
@@ -122,14 +124,21 @@ class TradingPair(TimestampedModel):
 
     def clean(self) -> None:
         """Проверяет, что базовый и котируемый активы совместимы."""
-        if not self.base_asset.is_compatible_with(self.quote_asset):
-            raise ValidationError('Нельзя создать торговую пару с активами с разными биржами, типами или рынками.')
-
+        validate_compatible_assets(self.base_asset, self.quote_asset)
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         """Переопределяет стандартный метод save, добавляя предварительную проверку."""
         self.clean()
         super().save(*args, **kwargs)
+
+    @property
+    def symbol(self) -> str:
+        """
+        Возвращает символ торговой пары.
+
+        Символ составляется из тикеров базового и котируемого активов, например: 'BTCUSDT'.
+        """
+        return self.base_asset.ticker + self.quote_asset.ticker
 
     class Meta:
         verbose_name = 'Торговая пара'

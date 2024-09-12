@@ -1,10 +1,9 @@
-from typing import Any
+# from typing import Any
 
 from django.db import models
 
+from accounting.models.finances import TradingPair
 from core.models import TimestampedModel
-
-from tradi.accounting.models.finances import TradingPair
 
 
 class Kline(TimestampedModel):

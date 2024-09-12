@@ -7,9 +7,21 @@ from accounting.models import FinancialAsset, TradingPair
 class FinancialAssetAdmin(admin.ModelAdmin):
     """Административная модель для управления финансовыми активами."""
 
-    list_display = ('ticker', 'exchange', 'type', 'market',)
-    list_filter = ('type', 'market', 'exchange',)
-    search_fields = ('ticker', 'exchange',)
+    list_display = (
+        'ticker',
+        'exchange',
+        'type',
+        'market',
+    )
+    list_filter = (
+        'type',
+        'market',
+        'exchange',
+    )
+    search_fields = (
+        'ticker',
+        'exchange',
+    )
     ordering = ('ticker',)
 
 
@@ -17,6 +29,17 @@ class FinancialAssetAdmin(admin.ModelAdmin):
 class TradingPairAdmin(admin.ModelAdmin):
     """Административная модель для управления торговыми парами."""
 
-    list_display = ('base_asset', 'quote_asset', 'traded')
-    list_filter = ('traded', 'base_asset', 'quote_asset')
-    search_fields = ('base_asset__ticker', 'quote_asset__ticker')
+    list_display = (
+        'base_asset',
+        'quote_asset',
+        'traded',
+    )
+    list_filter = (
+        'traded',
+        'base_asset',
+        'quote_asset',
+    )
+    search_fields = (
+        'base_asset__ticker',
+        'quote_asset__ticker',
+    )
