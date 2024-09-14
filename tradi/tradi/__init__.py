@@ -1,4 +1,4 @@
-from tradi.celery import app as celery_app
+from tradi.celery import celery_app
 
 __all__ = [
     'celery_app',
