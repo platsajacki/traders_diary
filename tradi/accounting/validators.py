@@ -1,6 +1,11 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from django.core.exceptions import ValidationError
 
-from accounting.models.finances import FinancialAsset
+if TYPE_CHECKING:
+    from accounting.models.finances import FinancialAsset
 
 
 def validate_compatible_assets(base_asset: FinancialAsset, quote_asset: FinancialAsset) -> None:
