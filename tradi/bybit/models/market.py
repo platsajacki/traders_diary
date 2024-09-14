@@ -47,47 +47,56 @@ class Kline(TimestampedModel):
         on_delete=models.CASCADE,
         verbose_name='Торговая пара',
         related_name='Klines',
+        editable=False,
     )
     interval = models.CharField(
         max_length=3,
         choices=TimeInterval.choices,
         verbose_name='Интервал',
+        editable=False,
     )
     start_time = models.DateTimeField(
         verbose_name='Время начала',
+        editable=False,
     )
     open_price = models.DecimalField(
         max_digits=20,
         decimal_places=8,
         verbose_name='Цена открытия',
+        editable=False,
     )
     high_price = models.DecimalField(
         max_digits=20,
         decimal_places=8,
         verbose_name='Наивысшая цена',
+        editable=False,
     )
     low_price = models.DecimalField(
         max_digits=20,
         decimal_places=8,
         verbose_name='Низшая цена',
+        editable=False,
     )
     close_price = models.DecimalField(
         max_digits=20,
         decimal_places=8,
         verbose_name='Цена закрытия',
         help_text='Это последняя цена сделки, если свеча не закрыта.',
+        editable=False,
     )
     volume = models.DecimalField(
         max_digits=20,
         decimal_places=8,
         verbose_name='Объем',
         help_text='Для контрактов: количество контрактов. Для спотов: количество монет.',
+        editable=False,
     )
     turnover = models.DecimalField(
         max_digits=20,
         decimal_places=8,
         verbose_name='Оборот',
         help_text='Единица измерения: количество квотируемых монет.',
+        editable=False,
     )
 
     class Meta:
