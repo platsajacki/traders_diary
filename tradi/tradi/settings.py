@@ -26,14 +26,16 @@ django_apps = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-# third_party_apps = [
-# ]
+third_party_apps = [
+    'django_celery_beat',
+    'django_celery_results',
+]
 local_apps = [
     'accounting',
     'bybit',
     'core',
 ]
-INSTALLED_APPS = django_apps + local_apps
+INSTALLED_APPS = django_apps + third_party_apps + local_apps
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,6 +116,12 @@ TEMPLATES = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BROKER_REDIS_URL = getenv('CELERY_BROKER_REDIS_URL', 'redis://localhost:6379')
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
 
 DATETIME_FORMATTER = '%d/%b/%Y %H:%M:%S'
