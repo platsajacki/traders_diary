@@ -1,6 +1,7 @@
 from typing import Any
 
 from django.db import models
+from django.db.models import UniqueConstraint
 
 from accounting.validators import validate_compatible_assets
 from core.models import TimestampedModel
@@ -85,6 +86,12 @@ class FinancialAsset(TimestampedModel):
     class Meta:
         verbose_name = 'Финансовый актив'
         verbose_name_plural = 'Финансовые активы'
+        constraints = [
+            UniqueConstraint(
+                fields=['ticker', 'type', 'market', 'exchange'],
+                name='unique_asset',
+            )
+        ]
 
 
 class TradingPair(TimestampedModel):
@@ -143,3 +150,9 @@ class TradingPair(TimestampedModel):
     class Meta:
         verbose_name = 'Торговая пара'
         verbose_name_plural = 'Торговые пары'
+        constraints = [
+            UniqueConstraint(
+                fields=['base_asset', 'quote_asset',],
+                name='unique_pair',
+            )
+        ]
