@@ -54,12 +54,12 @@ class FinancialAsset(TimestampedModel):
     type = models.CharField(
         'Тип актива',
         max_length=2,
-        choices=MarketType.choices,
+        choices=AssetType.choices,
     )
     market = models.CharField(
         'Рынок',
         max_length=2,
-        choices=AssetType.choices,
+        choices=MarketType.choices,
     )
     exchange = models.CharField(
         'Биржа',
@@ -68,7 +68,7 @@ class FinancialAsset(TimestampedModel):
     )
 
     def __str__(self) -> str:
-        return f'{self.type} - {self.ticker}'
+        return f'{self.ticker}'
 
     def is_compatible_with(self, other: 'FinancialAsset') -> bool:
         """Проверяет, совместим ли этот актив с другим активом по типу, бирже и рынку.

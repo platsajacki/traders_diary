@@ -37,8 +37,9 @@ class LinearUSDTGetterService(DataPipelineService):
         Возвращает:
             list[str]: Список тикеров активов, которые соответствуют критериям линейных фьючерсов USDT.
         """
+        symbols_data = data['result']['list']
         tikers = []
-        for symbol_data in data:
+        for symbol_data in symbols_data:
             symbol = symbol_data['symbol']
             if symbol_data['quoteCoin'] != USDT or symbol_data['isPreListing']:
                 continue

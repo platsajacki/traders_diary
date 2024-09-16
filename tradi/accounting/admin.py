@@ -30,6 +30,7 @@ class TradingPairAdmin(admin.ModelAdmin):
     """Административная модель для управления торговыми парами."""
 
     list_display = (
+        'symbol',
         'base_asset',
         'quote_asset',
         'traded',
