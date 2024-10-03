@@ -3,10 +3,9 @@ from typing import Any
 from django.db.transaction import atomic
 
 from accounting.models import FinancialAsset, TradingPair
-
-from core.services.interfaces import DataPipelineService
 from bybit.connections import http_bybit
 from bybit.constants import FUTURES_BYBIT_DATA, LINEAR, USDT
+from core.services.interfaces import DataPipelineService
 
 
 class LinearUSDTGetterService(DataPipelineService):

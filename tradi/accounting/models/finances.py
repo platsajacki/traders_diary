@@ -70,6 +70,9 @@ class FinancialAsset(TimestampedModel):
     def __str__(self) -> str:
         return f'{self.ticker}'
 
+    def __repr__(self) -> str:
+        return f'{self.__class__.__name__}({self.ticker}, {self.market})'
+
     def is_compatible_with(self, other: 'FinancialAsset') -> bool:
         """Проверяет, совместим ли этот актив с другим активом по типу, бирже и рынку.
 
@@ -152,7 +155,16 @@ class TradingPair(TimestampedModel):
         verbose_name_plural = 'Торговые пары'
         constraints = [
             UniqueConstraint(
-                fields=['base_asset', 'quote_asset',],
+                fields=[
+                    'base_asset',
+                    'quote_asset',
+                ],
                 name='unique_pair',
             )
         ]
+
+    def __str__(self) -> str:
+        return self.symbol
+
+    def __repr__(self) -> str:
+        return f'{self.__class__.__name__}({self.base_asset}, {self.quote_asset})'

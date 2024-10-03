@@ -1,6 +1,6 @@
-from tradi.celery import celery_app
+from bybit.services.celery import LinearUSDTGetterService, OneHourKlinesGetterService
 
-from bybit.services.celery import OneHourKlinesGetterService, LinearUSDTGetterService
+from tradi.celery import celery_app
 
 
 @celery_app.task

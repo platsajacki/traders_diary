@@ -23,3 +23,6 @@ makemigrations:
 
 migrate:
 	python tradi/manage.py migrate
+
+shell:
+	python tradi/manage.py shell

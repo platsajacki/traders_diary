@@ -36,10 +36,6 @@ class Kline(TimestampedModel):
         close_price (DecimalField): Цена закрытия бара, если свеча закрыта, либо последняя цена сделки.
         volume (DecimalField): Объем торгов за период свечи.
         turnover (DecimalField): Оборот торгов в квотируемых монетах за период свечи.
-
-    Методы:
-        __str__() -> str:
-            Возвращает строковое представление объекта, состоящее из символа торговой пары и временного интервала.
     """
 
     pair = models.ForeignKey(
@@ -103,10 +99,8 @@ class Kline(TimestampedModel):
         verbose_name = 'Бар'
         verbose_name_plural = 'Бары'
 
-    def __str__(self):
-        """
-        Возвращает строковое представление ценового бара.
-
-        Формат: символ торговой пары и интервал времени, например: 'BTCUSDT 1 минута'.
-        """
+    def __str__(self) -> str:
         return f'{self.pair.symbol} {self.interval}'
+
+    def __repr__(self) -> str:
+        return f'{self.__class__.__name__}({self.base_asset}, {self.quote_asset})'
